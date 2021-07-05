@@ -17,7 +17,7 @@ namespace HangmanGame
 
         static void Main(string[] args)
         {
-            bool programRunning = true;
+            bool programRunning = true;           // program loop condition
             List<string> countryCapitals = getCapitalsFromFile();
 
             displayAvailableOptions();
@@ -48,19 +48,15 @@ namespace HangmanGame
         private static List<string> getCapitalsFromFile()
         {
             List<string> lines = new List<string>();
-            Console.WriteLine("trying to get file from: " + capitalsListFilePath);
-            if (File.Exists(capitalsListFilePath))
+                if (File.Exists(capitalsListFilePath))
             {   // file found
-
-                Console.WriteLine("File found");
                 lines = File.ReadAllLines(capitalsListFilePath).ToList();
-
                 return lines;
             }
             else
             {   // file not found
 
-                Console.WriteLine("File NOT found");
+                Console.WriteLine("File {0} NOT found", CapitalsListFileName);
                 return new List<string> { "fake country | fake capital" };
             }
         }

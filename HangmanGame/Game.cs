@@ -72,10 +72,9 @@ namespace HangmanGame
             string line = Console.ReadLine().ToUpper();
             switch (line)
             {
-                case "exit":    // EXIT GAME
-                    exitGame();
+                case "EXIT":    // EXIT GAME
+                        exitGame();
                     break;
-
                 default:
                     playersTries++;
                     if (line.Length > 1)         // USER TYPED WORD
@@ -121,7 +120,7 @@ namespace HangmanGame
             if (win) // game ending, player won
             {
                 Console.Clear();
-                Console.WriteLine(password);
+                Console.WriteLine(capital);
                 Console.WriteLine("Congratulations you won!. " +
                     "You managed to reveal the password in {0} seconds. " +
                     "Also it took you {1} tries to do it.", ts.Seconds, playersTries);
@@ -154,8 +153,6 @@ namespace HangmanGame
 
             this.country = separatedCountryCapital[0].ToUpper();
             this.capital = separatedCountryCapital[1].ToUpper();
-
-            Console.WriteLine("Country: {0}, Capital: {1}", country, capital);
         }
 
         private List<int> getCharsIndexes(string c)      // this method finds indexes on which appears a given letter in a string
