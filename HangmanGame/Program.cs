@@ -8,10 +8,12 @@ namespace HangmanGame
     class Program
     {
         const string CapitalsListFileName = "countries_and_capitals.txt";
-        static string capitalsListFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"data\", CapitalsListFileName);
+        const string HighscoreFileName = "highscore.txt";
 
         const string WelcomeText = "Hangman Game \nWhat do you want to do?";
         static string[] options = { "Start Game", "Highscore", "Exit" };
+        static string capitalsListFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"data\", CapitalsListFileName);
+        static string highscoreFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"data\", HighscoreFileName);
 
         static void Main(string[] args)
         {
@@ -38,12 +40,10 @@ namespace HangmanGame
                 }
 
             } while (programRunning);
+
         }
 
-        private static void displayHighscore()
-        {
-            throw new NotImplementedException();
-        }
+
 
         private static List<string> getCapitalsFromFile()
         {
@@ -65,6 +65,38 @@ namespace HangmanGame
             }
         }
 
+        public static void putRecordToHighscores(string name, int time, int tries, string city)
+        {
+            // save line to file ( create if theres no file)
+            // line must includes: date, name, time, tries, city
+            List<string> lines = new List<string>();
+            if (File.Exists(highscoreFilePath))
+                lines = File.ReadAllLines(highscoreFilePath).ToList();
+            string date = DateTime.Today.ToString();
+            string record = "Date: " + date + " | Player: " + name + " | Time: " + time + "s | Letters checked: " + tries + " | Capital: " + city;
+            lines.Add(record);
+            File.WriteAllLines(highscoreFilePath, lines);
+        }
+
+        private static void displayHighscore()
+        {
+            List<string> lines = new List<string>();
+            if (File.Exists(highscoreFilePath))
+            {
+                lines = File.ReadAllLines(highscoreFilePath).ToList();
+                foreach(string line in lines)
+                {
+                    Console.WriteLine(line);
+                }
+            }
+            else
+            {
+                Console.WriteLine("No highscores yet. Try to win a game.");
+                return;
+            }
+                
+        }
+
         public static void displayAvailableOptions()
         {
             Console.WriteLine(WelcomeText);
@@ -73,5 +105,8 @@ namespace HangmanGame
                 Console.WriteLine("{0} - {1}", i + 1, options[i]);
             }
         }
+
+        
     }
+
 }
