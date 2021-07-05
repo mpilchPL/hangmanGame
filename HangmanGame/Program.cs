@@ -27,7 +27,7 @@ namespace HangmanGame
                         Game newGame = new Game(countryCapitals);
                         break;
                     case "2": // HIGHSCORE
-                        //display highscore
+                        displayHighscore();
                         break;
                     case "3": // EXIT GAME
                         programRunning = false;
@@ -40,6 +40,10 @@ namespace HangmanGame
             } while (programRunning);
         }
 
+        private static void displayHighscore()
+        {
+            throw new NotImplementedException();
+        }
 
         private static List<string> getCapitalsFromFile()
         {
